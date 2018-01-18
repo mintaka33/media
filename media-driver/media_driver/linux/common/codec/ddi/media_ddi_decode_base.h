@@ -153,6 +153,8 @@ public:
     //!           VA_STATUS_SUCCESS if success
     //!
     virtual VAStatus SetDecodeParams();
+
+    int32_t ExecuteApgPipeline();
     
     //!
     //! \brief    Make the end of rendering for a picture

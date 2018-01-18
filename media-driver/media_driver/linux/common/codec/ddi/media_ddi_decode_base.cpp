@@ -33,6 +33,8 @@
 #include "media_interfaces_mmd.h"
 #include "mos_solo_generic.h"
 
+#include "common.h"
+
 DdiMediaDecode::DdiMediaDecode(DDI_DECODE_CONFIG_ATTR *ddiDecodeAttr)
     : DdiMediaBase()
 {
@@ -630,6 +632,16 @@ VAStatus DdiMediaDecode::SetDecodeParams()
     return VA_STATUS_SUCCESS;
 }
 
+int32_t DdiMediaDecode::ExecuteApgPipeline()
+{
+    uint32_t addrLow = 0;
+    uint32_t addrHigh = 0;
+
+    setGpuAddress(&addrLow, &addrHigh, 1000, 10, 8);
+
+    return 0;
+}
+
 VAStatus DdiMediaDecode::EndPicture(
     VADriverContextP ctx,
     VAContextID      context)
@@ -657,6 +669,12 @@ VAStatus DdiMediaDecode::EndPicture(
     {
         return VA_STATUS_ERROR_DECODING_ERROR;
     }
+
+    if (ExecuteApgPipeline() != 0)
+    {
+        return VA_STATUS_ERROR_DECODING_ERROR;
+    }
+
     DDI_FUNCTION_EXIT(VA_STATUS_SUCCESS);
     return VA_STATUS_SUCCESS;
 }
