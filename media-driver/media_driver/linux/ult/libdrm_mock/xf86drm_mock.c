@@ -336,7 +336,7 @@ mosdrmIoctl(int fd, unsigned long request, void *arg)
         }
         break;
         default:
-            printf("drmIoctl: with unsupport IOType\n");
+            //printf("drmIoctl: with unsupport IOType\n");
             do {
                 ret = ioctl(fd, request, arg);
             } while (ret == -1 && (errno == EINTR || errno == EAGAIN));
