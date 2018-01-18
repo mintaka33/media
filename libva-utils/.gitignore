@@ -1,6 +1,11 @@
 autom4te.cache
 m4
 .deps
+.libs
+
+*.la
+*.lo
+*.o
 
 Makefile
 Makefile.in
@@ -19,3 +24,16 @@ libtool
 ltmain.sh
 missing
 stamp-h1
+
+loadjpeg
+mpeg2vldemo
+avcenc
+h264encode
+jpegenc
+mpeg2vaenc
+svctenc
+vp9enc
+putsurface
+putsurface_wayland
+vainfo
+vavpp
