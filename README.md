@@ -1,1 +1,86 @@
-# media
+# linux media driver 
+
+## Build instructions
+
+### 1. Build libva
+
+```bash
+cd libva
+
+./autogen.sh CFLAGS=-g CXXFLAGS=-g
+
+make
+
+sudo make install
+```
+
+### 2. Build driver
+
+```bash
+mkdir build
+
+cd build
+
+cmake ../media-driver \
+-DCMAKE_INSTALL_PREFIX=/usr \
+-DMEDIA_VERSION="2.0.0" \
+-DBUILD_ALONG_WITH_CMRTLIB=1 \
+-DBS_DIR_GMMLIB=`pwd`/../gmmlib/Source/GmmLib/ \
+-DBS_DIR_COMMON=`pwd`/../gmmlib/Source/Common/ \
+-DBS_DIR_INC=`pwd`/../gmmlib/Source/inc/ \
+-DBS_DIR_MEDIA=`pwd`/../media-driver
+
+make -j8
+
+sudo make install
+```
+
+### 3. Build libva-utils
+
+```bash
+cd libva-utils
+
+./autogen.sh CFLAGS=-g CXXFLAGS=-g
+
+make
+
+sudo make install
+```
+
+## Run driver
+
+### 1. Set environment variables
+* Edit .bashrc file
+```bash
+cd ~
+nano .bashrc
+```
+* Add below lines at the bottom of .bashrc file
+```
+export LD_LIBRARY_PATH=/usr/local/lib
+export LIBVA_DRIVERS_PATH=/usr/local/lib/dri
+export LIBVA_DRIVER_NAME=iHD
+```
+* Restart terminal
+
+### 2. Run libva-utils sample applications
+
+  * Run vainfo to query driver capabilities
+```bash
+cd libva-utils/vainfo
+
+./vainfo
+```
+  * Run decode test
+```bash
+cd libva-utils/decode
+
+./mpeg2vldemo
+```
+
+  * Run encode test
+```bash
+cd libva-utils/encode
+
+./avcenc
+```
