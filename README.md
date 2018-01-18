@@ -1,4 +1,4 @@
-# linux media driver 
+# Linux Media Driver 
 
 ## Build instructions
 
@@ -84,3 +84,14 @@ cd libva-utils/encode
 
 ./avcenc
 ```
+
+## Reference
+
+### 1. libva
+- https://github.com/01org/libva/commit/df544cd5a31e54d4cbd33a391795a8747ddaf789
+### 2. media-driver
+- https://github.com/intel/media-driver/commit/5c37e4fc6dcdd392fff7945c7aea775f475f7ee6
+### 3. gmmlib
+- https://github.com/intel/gmmlib/commit/b1451bbe4c506f17ddc819f12b4b448fc08698c5
+### 4. libva-utils
+- https://github.com/01org/libva-utils/commit/7b85ff442d99c233fb901a6fe3407d5308971645
