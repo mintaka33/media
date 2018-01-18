@@ -42,6 +42,7 @@ set(SOURCES_ "")
 
 # add source
 media_include_subdirectory(agnostic)
+media_include_subdirectory(apogeios)
 media_include_subdirectory(linux)
 include(${CMAKE_CURRENT_LIST_DIR}/media_srcs_ext.cmake OPTIONAL)
 
