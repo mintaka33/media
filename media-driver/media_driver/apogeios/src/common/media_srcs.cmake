@@ -20,10 +20,18 @@
 
 set(TMP_SOURCES_
     ${CMAKE_CURRENT_LIST_DIR}/common.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/resource_base.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/resource_cb.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/resource_cb_linux.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/media_resource.cpp
 )
 
 set(TMP_HEADERS_
     ${CMAKE_CURRENT_LIST_DIR}/common.h
+    ${CMAKE_CURRENT_LIST_DIR}/resource_base.h
+    ${CMAKE_CURRENT_LIST_DIR}/resource_cb.h
+    ${CMAKE_CURRENT_LIST_DIR}/resource_cb_linux.h
+    ${CMAKE_CURRENT_LIST_DIR}/media_resource.h
 )
 
 set(SOURCES_
