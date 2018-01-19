@@ -20,10 +20,16 @@
 
 set(TMP_SOURCES_
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_base.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_mi.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_render.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_vdbox.cpp
 )
 
 set(TMP_HEADERS_
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_base.h
+    ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_mi.h
+    ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_render.h
+    ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_vdbox.h
 )
 
 set(SOURCES_
