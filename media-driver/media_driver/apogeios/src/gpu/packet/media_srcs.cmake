@@ -18,7 +18,28 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-media_include_subdirectory(element)
-media_include_subdirectory(packet)
-#media_include_subdirectory(pipeline)
-#media_include_subdirectory(task)
+set(TMP_SOURCES_
+    ${CMAKE_CURRENT_LIST_DIR}/packet.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/packet_cm.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/packet_ff.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/packet_kernel.cpp
+)
+
+set(TMP_HEADERS_
+    ${CMAKE_CURRENT_LIST_DIR}/packet.h
+    #${CMAKE_CURRENT_LIST_DIR}/packet_cm.h
+    #${CMAKE_CURRENT_LIST_DIR}/packet_ff.h
+    #${CMAKE_CURRENT_LIST_DIR}/packet_kernel.h
+)
+
+set(D3D11_SOURCES_
+    ${D3D11_SOURCES_}
+    ${TMP_SOURCES_}
+ )
+
+set(D3D11_HEADERS_
+    ${D3D11_HEADERS_}
+    ${TMP_HEADERS_}
+)
+
+media_add_curr_to_include_path()
