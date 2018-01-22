@@ -26,6 +26,7 @@ set(TMP_SOURCES_
     ${CMAKE_CURRENT_LIST_DIR}/cmd_buffer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/gpu_context_cb.cpp
     ${CMAKE_CURRENT_LIST_DIR}/gpu_context.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/state_heap.cpp
 )
 
 set(TMP_HEADERS_
@@ -36,6 +37,7 @@ set(TMP_HEADERS_
     ${CMAKE_CURRENT_LIST_DIR}/cmd_buffer.h
     ${CMAKE_CURRENT_LIST_DIR}/gpu_context_cb.h
     ${CMAKE_CURRENT_LIST_DIR}/gpu_context.h
+    ${CMAKE_CURRENT_LIST_DIR}/state_heap.h
 )
 
 set(SOURCES_
