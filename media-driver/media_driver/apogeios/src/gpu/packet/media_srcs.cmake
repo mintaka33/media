@@ -22,14 +22,14 @@ set(TMP_SOURCES_
     ${CMAKE_CURRENT_LIST_DIR}/packet.cpp
     ${CMAKE_CURRENT_LIST_DIR}/packet_ff.cpp
     ${CMAKE_CURRENT_LIST_DIR}/packet_kernel.cpp
-    #${CMAKE_CURRENT_LIST_DIR}/packet_cm.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/packet_cm.cpp
 )
 
 set(TMP_HEADERS_
     ${CMAKE_CURRENT_LIST_DIR}/packet.h
     ${CMAKE_CURRENT_LIST_DIR}/packet_ff.h
     ${CMAKE_CURRENT_LIST_DIR}/packet_kernel.h
-    #${CMAKE_CURRENT_LIST_DIR}/packet_cm.h
+    ${CMAKE_CURRENT_LIST_DIR}/packet_cm.h
 )
 
 set(SOURCES_
