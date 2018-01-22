@@ -33,6 +33,8 @@ express and approved by Intel in writing.
 #include "gpu_context_cb.h"
 #include "cmd_buffer.h"
 
+#include "UmKmEnum.h"
+
 namespace Apogeios 
 {
 
@@ -42,7 +44,7 @@ public:
     GpuContext();
     ~GpuContext();
 
-    int32_t createContext(uint32_t gpuNode);
+    int32_t createContext(GPUNODE_ORDINAL gpuNode);
     int32_t destroyContext();
     int32_t submitCommand(CommandBuffer* pCmdBuf);
 
@@ -50,7 +52,7 @@ public:
 
 private:
     uint32_t hRTContext_ = 0;
-    uint32_t gpuNodeOrdinal_ = 0;
+    GPUNODE_ORDINAL gpuNodeOrdinal_ = 0;
     uint64_t hwContextId_ = 0;
     static IContextCb* pCallback_;
 };

@@ -41,7 +41,7 @@ GpuContext::~GpuContext()
 {
 }
 
-int32_t GpuContext::createContext(uint32_t gpuNode)
+int32_t GpuContext::createContext(GPUNODE_ORDINAL gpuNode)
 {
     return 0;
 }
