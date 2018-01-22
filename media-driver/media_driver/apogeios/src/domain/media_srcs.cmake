@@ -18,8 +18,7 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-media_include_subdirectory(common)
-media_include_subdirectory(gpu)
-media_include_subdirectory(domain)
+media_include_subdirectory(decode)
+#media_include_subdirectory(encode)
 
-
+media_add_curr_to_include_path()

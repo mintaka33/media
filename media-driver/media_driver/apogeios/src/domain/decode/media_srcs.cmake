@@ -18,8 +18,22 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-media_include_subdirectory(common)
-media_include_subdirectory(gpu)
-media_include_subdirectory(domain)
+set(TMP_SOURCES_
+    ${CMAKE_CURRENT_LIST_DIR}/convert_nv12_p010.cpp
+)
 
+set(TMP_HEADERS_
+    ${CMAKE_CURRENT_LIST_DIR}/convert_nv12_p010.h
+)
 
+set(SOURCES_
+    ${SOURCES_}
+    ${TMP_SOURCES_}
+ )
+
+set(HEADERS_
+    ${HEADERS_}
+    ${TMP_HEADERS_}
+)
+
+media_add_curr_to_include_path()
