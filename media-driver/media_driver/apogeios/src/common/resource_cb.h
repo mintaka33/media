@@ -32,6 +32,9 @@ express and approved by Intel in writing.
 
 #include <stdint.h>
 
+namespace Apogeios
+{
+
 class IResourceCb
 {
 public:
@@ -53,3 +56,5 @@ public:
 
 private:
 };
+
+}

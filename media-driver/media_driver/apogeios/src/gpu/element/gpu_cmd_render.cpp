@@ -32,6 +32,9 @@ express and approved by Intel in writing.
 #include "gpu_cmd_render.h"
 #include "mhw_vdbox.h"
 
+namespace Apogeios
+{
+
 CmdPipelineSelect::CmdPipelineSelect(PIPELINE_SELECTION pipelineSelection)
     : GpuCmdRender(),
     pipelineSelection_(pipelineSelection)
@@ -693,4 +696,6 @@ void CmdMediaObjectWalker::parse()
     LOG_CMD_SUB_VAL(pCmd_->DW16.GlobalInnerLoopUnitY);
 
     logCmdFlush();
+}
+
 }

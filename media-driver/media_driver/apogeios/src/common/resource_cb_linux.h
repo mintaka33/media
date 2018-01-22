@@ -32,6 +32,9 @@ express and approved by Intel in writing.
 
 #include "resource_cb.h"
 
+namespace Apogeios
+{
+
 class ResourceCbImpl : public IResourceCb
 {
 public:
@@ -56,3 +59,5 @@ public:
 private:
     static ResourceCbImpl* pInstance_;
 };
+
+}

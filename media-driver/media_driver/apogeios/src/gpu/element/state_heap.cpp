@@ -31,6 +31,9 @@ express and approved by Intel in writing.
 #include "common.h"
 #include "state_heap.h"
 
+namespace Apogeios
+{
+
 SSH::SSH() :
     cmdInit_()
 {
@@ -302,4 +305,6 @@ int32_t ISH::destroy()
     }
 
     return result;
+}
+
 }

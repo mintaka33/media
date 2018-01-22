@@ -34,6 +34,9 @@ express and approved by Intel in writing.
 #include "mhw_mi_hwcmd_g9_X.h"
 #include "media_resource.h"
 
+namespace Apogeios
+{
+
 enum FLUSH_MODE
 {
     FLUSH_NONE = 0,              // No flush
@@ -201,3 +204,5 @@ public:
     bool validate();
     void parse();
 };
+
+}

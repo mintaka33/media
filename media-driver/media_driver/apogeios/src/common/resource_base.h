@@ -32,6 +32,9 @@ express and approved by Intel in writing.
 
 #include <stdint.h>
 
+namespace Apogeios
+{
+
 enum RESOURCE_TYPE
 {
     RES_TYPE_INVALID = -1,
@@ -374,3 +377,5 @@ public:
 
 private:
 };
+
+}

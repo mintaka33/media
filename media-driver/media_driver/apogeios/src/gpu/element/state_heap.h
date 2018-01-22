@@ -35,6 +35,9 @@ express and approved by Intel in writing.
 #include "media_resource.h"
 #include "mhw_state_heap_hwcmd_g9_X.h"
 
+namespace Apogeios
+{
+
 class SSH
 {
 public:
@@ -112,3 +115,5 @@ private:
     std::vector<uint32_t> kernelBinary_;
     MediaResource* pRes_ = nullptr;
 };
+
+}

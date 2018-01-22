@@ -30,6 +30,9 @@ express and approved by Intel in writing.
 
 #include "resource_cb_linux.h"
 
+namespace Apogeios
+{
+
 ResourceCbImpl *ResourceCbImpl::getInstance()
 {
     return pInstance_;
@@ -93,4 +96,6 @@ int32_t ResourceCbImpl::MakeResidentCb(void *pParams)
 int32_t ResourceCbImpl::EvictCb(void *pParams)
 {
     return 0;
+}
+
 }

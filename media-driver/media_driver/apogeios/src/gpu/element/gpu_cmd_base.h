@@ -35,6 +35,9 @@ express and approved by Intel in writing.
 #include <iomanip>
 #include <vector>
 
+namespace Apogeios
+{
+
 class MediaResource;
 
 #define LOG_CMD_NAME(val)    logCmdName(val)
@@ -85,3 +88,5 @@ private:
     static std::ofstream logFile_;
     std::vector<MediaResource*> resArrayInCmd_;
 };
+
+}

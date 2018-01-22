@@ -40,6 +40,9 @@ express and approved by Intel in writing.
 #define     MAX_CURBE_DATA_SIZE                 0x01FFFF
 #define     MAX_INTERFACE_DESCRIPTOR_DATA_SIZE  2048
 
+namespace Apogeios
+{
+
 enum PIPELINE_SELECTION
 {
     PIPELINE_SELECTION_3D = 0,    //!< 3D pipeline is selected
@@ -201,3 +204,5 @@ private:
     MOS_STATUS setParamsToCmd();
     MHW_WALKER_PARAMS walkerParams_ = { 0 };
 };
+
+}

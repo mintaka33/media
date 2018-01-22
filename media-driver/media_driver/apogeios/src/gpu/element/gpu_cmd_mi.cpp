@@ -32,6 +32,9 @@ express and approved by Intel in writing.
 #include "gpu_cmd_mi.h"
 #include "mhw_vdbox.h"
 
+namespace Apogeios
+{
+
 void CmdPipeControl::initCmd(FLUSH_MODE mode)
 {
     pCmd_->DW1.PipeControlFlushEnable = true;
@@ -341,4 +344,6 @@ bool CmdMiStoreRegisterMem::validate()
 
 void CmdMiStoreRegisterMem::parse()
 {
+}
+
 }

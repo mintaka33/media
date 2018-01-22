@@ -39,6 +39,9 @@ express and approved by Intel in writing.
 #include "GmmLib.h"
 #include "media_fourcc.h"
 
+namespace Apogeios
+{
+
 class CmdPacket;
 
 inline GMM_RESOURCE_FORMAT ResFmt2GmmFmt(RES_FORMAT format)
@@ -211,3 +214,5 @@ struct MediaResourceBind
     uint32_t surfIndex; // surface index in Curbe
     uint32_t numPlane;  // surface plane number
 };
+
+}

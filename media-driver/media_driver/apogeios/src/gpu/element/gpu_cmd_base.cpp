@@ -30,6 +30,9 @@ express and approved by Intel in writing.
 
 #include "gpu_cmd_base.h"
 
+namespace Apogeios
+{
+
 std::ofstream GpuCmdBase::logFile_("gpu_cmd_log.txt");
 
 void GpuCmdBase::logCmdName(const char* name)
@@ -65,4 +68,6 @@ void GpuCmdBase::logCmdSubVal(uint64_t val, char* name)
 void GpuCmdBase::logCmdFlush()
 {
     logFile_.flush();
+}
+
 }

@@ -30,6 +30,9 @@ express and approved by Intel in writing.
 
 #include "media_resource.h"
 
+namespace Apogeios
+{
+
 MediaResource::MediaResource(RESOURCE_TYPE type, RES_FORMAT format, uint32_t size, bool bExecute, std::string name)
 {
     resType_ = type;
@@ -120,4 +123,6 @@ int32_t MediaResource::dumpToFile()
 int32_t MediaResource::initGmmParam()
 {
     return 0;
+}
+
 }

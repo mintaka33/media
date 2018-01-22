@@ -37,6 +37,9 @@ express and approved by Intel in writing.
 #include "mhw_vdbox.h"
 #include "mhw_vdbox_mfx_hwcmd_g9_skl.h"
 
+namespace Apogeios
+{
+
 enum VDBoxCodecStandard
 {
     MFX_MPEG2 = 0,
@@ -541,3 +544,5 @@ public:
 private:
     std::vector<uint8_t> cmdExt_;
 };
+
+}

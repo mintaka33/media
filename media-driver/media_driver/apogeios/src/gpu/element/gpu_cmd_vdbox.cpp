@@ -32,6 +32,9 @@ express and approved by Intel in writing.
 #include "gpu_cmd_vdbox.h"
 #include "mhw_vdbox.h"
 
+namespace Apogeios
+{
+
 CmdMfxPipeModeSelect::CmdMfxPipeModeSelect(
     VDBoxCodecStandard standard,
     bool isEncode,
@@ -866,3 +869,5 @@ const CmdMfxAvcImgState::VDEncFrameDelta CmdMfxAvcImgState::tblFrameDelta_[2][52
         { 100, 200 }
     }
 };
+
+}

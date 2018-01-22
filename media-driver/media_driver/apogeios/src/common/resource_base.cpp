@@ -30,10 +30,15 @@ express and approved by Intel in writing.
 
 #include "resource_base.h"
 
+namespace Apogeios
+{
+
 IResource::IResource()
 {
 }
 
 IResource::~IResource()
 {
+}
+
 }
