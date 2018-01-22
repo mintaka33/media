@@ -38,6 +38,9 @@ express and approved by Intel in writing.
 class MediaResource;
 class MediaTaskCm;
 
+namespace Apogeios
+{
+
 class CmdPacket
 {
 public:
@@ -73,3 +76,5 @@ private:
     GpuContext* gpuContext_;
     uint64_t submissionCount_ = 0;
 };
+
+}

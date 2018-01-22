@@ -31,6 +31,9 @@ express and approved by Intel in writing.
 #include "packet.h"
 #include <set>
 
+namespace Apogeios
+{
+
 CmdPacket::CmdPacket()
 {
     cmdBuffer_ = new CommandBuffer;
@@ -170,4 +173,6 @@ int32_t CmdPacket::syncGpuContext()
     }
 
     return 0;
+}
+
 }
