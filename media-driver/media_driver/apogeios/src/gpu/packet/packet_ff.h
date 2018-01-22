@@ -23,38 +23,31 @@ express and approved by Intel in writing.
 ======================= end_copyright_notice ==================================*/
 
 //!
-//! \file     gpu_context.h
-//! \brief    gpu context class definition
+//! \file     packet_ff.h
+//! \brief    ff cmd packet class definition
 //! \details
 //!
 
 #pragma once
 
-#include "gpu_context_cb.h"
-#include "cmd_buffer.h"
+#include "packet.h"
 
-#include "UmKmEnum.h"
-
-namespace Apogeios 
+namespace Apogeios
 {
 
-class GpuContext
+class FfPacket : public CmdPacket
 {
 public:
-    GpuContext();
-    ~GpuContext();
+    FfPacket();
+    ~FfPacket();
 
-    int32_t createContext(GPUNODE_ORDINAL gpuNode);
-    int32_t destroyContext();
-    int32_t submitCommand(CommandBuffer* pCmdBuf);
-
-    static void setCallbackInstance(IContextCb* pCallback) { pCallback_ = pCallback; };
+    virtual int32_t createPacket();
+    virtual int32_t preparePacket();
+    virtual int32_t submitPacket();
+    virtual int32_t destroyPacket();
+    int32_t submitPacket(MediaTaskCm* pTask) { return 0; };
 
 private:
-    uint32_t hRTContext_ = 0;
-    GPUNODE_ORDINAL gpuNodeOrdinal_ = GPUNODE_VIDEO;
-    uint64_t hwContextId_ = 0;
-    static IContextCb* pCallback_;
 };
-    
+
 }

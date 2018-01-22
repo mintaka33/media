@@ -23,38 +23,42 @@ express and approved by Intel in writing.
 ======================= end_copyright_notice ==================================*/
 
 //!
-//! \file     gpu_context.h
-//! \brief    gpu context class definition
+//! \file     packet_ff.cpp
+//! \brief    ff cmd packet class implementation
 //! \details
 //!
 
-#pragma once
+#include "packet_ff.h"
 
-#include "gpu_context_cb.h"
-#include "cmd_buffer.h"
-
-#include "UmKmEnum.h"
-
-namespace Apogeios 
+namespace Apogeios
 {
 
-class GpuContext
+FfPacket::FfPacket()
 {
-public:
-    GpuContext();
-    ~GpuContext();
+}
 
-    int32_t createContext(GPUNODE_ORDINAL gpuNode);
-    int32_t destroyContext();
-    int32_t submitCommand(CommandBuffer* pCmdBuf);
+FfPacket::~FfPacket()
+{
+}
 
-    static void setCallbackInstance(IContextCb* pCallback) { pCallback_ = pCallback; };
+int32_t FfPacket::createPacket()
+{
+    return 0;
+}
 
-private:
-    uint32_t hRTContext_ = 0;
-    GPUNODE_ORDINAL gpuNodeOrdinal_ = GPUNODE_VIDEO;
-    uint64_t hwContextId_ = 0;
-    static IContextCb* pCallback_;
-};
-    
+int32_t FfPacket::preparePacket()
+{
+    return 0;
+}
+
+int32_t FfPacket::submitPacket()
+{
+    return 0;
+}
+
+int32_t FfPacket::destroyPacket()
+{
+    return 0;
+}
+
 }
