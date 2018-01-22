@@ -23,6 +23,7 @@ set(TMP_SOURCES_
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_mi.cpp
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_render.cpp
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_vdbox.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/cmd_buffer.cpp
 )
 
 set(TMP_HEADERS_
@@ -30,6 +31,7 @@ set(TMP_HEADERS_
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_mi.h
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_render.h
     ${CMAKE_CURRENT_LIST_DIR}/gpu_cmd_vdbox.h
+    ${CMAKE_CURRENT_LIST_DIR}/cmd_buffer.h
 )
 
 set(SOURCES_
