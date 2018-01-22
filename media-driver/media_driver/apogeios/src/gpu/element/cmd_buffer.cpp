@@ -31,6 +31,9 @@ express and approved by Intel in writing.
 #include <assert.h>
 #include "cmd_buffer.h"
 
+namespace Apogeios
+{
+
 CommandBuffer::CommandBuffer()
 {
     // Create a big enough command buffer resource in constructor. The reason is, SSH resides in command buffer. When set
@@ -106,4 +109,6 @@ void CommandBuffer::combineBuffer(std::vector<GpuCmdBase*>& cmdArray)
     {
         cmdBufData_.insert(cmdBufData_.end(), sshData_.begin(), sshData_.end());
     }
+}
+
 }

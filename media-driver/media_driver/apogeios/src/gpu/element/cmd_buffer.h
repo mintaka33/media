@@ -37,6 +37,9 @@ express and approved by Intel in writing.
 #include "gpu_cmd_base.h"
 #include "media_resource.h"
 
+namespace Apogeios
+{
+
 class CommandBuffer
 {
 public:
@@ -65,3 +68,5 @@ private:
     std::vector<uint8_t> cmdBufData_;
     MediaResource *cmdBufRes_ = nullptr;
 };
+    
+}
