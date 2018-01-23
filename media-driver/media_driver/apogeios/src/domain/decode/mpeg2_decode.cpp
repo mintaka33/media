@@ -45,22 +45,80 @@ Mpeg2DecodePkt::~Mpeg2DecodePkt()
 
 int32_t Mpeg2DecodePkt::createPacket()
 {
+    if (statusReport_ == nullptr)
+    {
+        statusReport_ = new MediaResource(RES_TYPE_BUFFER, RES_FORMAT_Buffer, 4096, false, "StatusReport");
+        if (statusReport_->create() != 0)
+            return -1;
+    }
+
+    if (allocateResource() != 0)
+        return -1;
+
+    //  Create GPU context (VDBox Ring) for fix function packet
+    if (createGpuContext(GPUNODE_VIDEO) != 0)
+    {
+        return -1;
+    }
+
     return 0;
 }
 
 int32_t Mpeg2DecodePkt::preparePacket()
 {
+    // Construct a GPU command sequence for running a kernel
+    if (constructCmdSequence() != 0)
+        return -1;
+
+    // Validate each GPU commands programming correctness
+    if (validateCmdSequence() != 0)
+        return -1;
+
+    // Dump parsed command buffer into file
+    if (dumpCmdSequence() != 0)
+        return -1;
+
+    // Collect all resources that are being referred by command packet
+    // We need this resource list to residency management and synchronization
+    updateResArray();
+
+    // add external resources
+
     return 0;
 }
 
 int32_t Mpeg2DecodePkt::submitPacket()
 {
+    if (buildCmdBuffer() != 0)
+        return -1;
+
+    if (submitCmdBuffer() != 0)
+        return -1;
+
     return 0;
 }
 
 int32_t Mpeg2DecodePkt::destroyPacket()
 {
-    return 0;
+    bool bFail = false;
+
+    if (statusReport_)
+    {
+        statusReport_->destroy();
+        delete statusReport_;
+        statusReport_ = nullptr;
+    }
+
+    deleteGpuCmd();
+
+    if (destroyResource() != 0)
+        bFail = true;
+
+    //  Destroy GPU context
+    if (destroyGpuContext() != 0)
+        bFail = true;
+
+    return (bFail) ? -1 : 0;
 }
 
 int32_t Mpeg2DecodePkt::constructCmdSequence()
