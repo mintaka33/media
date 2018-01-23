@@ -34,6 +34,7 @@
 #include "mos_solo_generic.h"
 
 #include "common.h"
+#include "decode_pipeline.h"
 
 DdiMediaDecode::DdiMediaDecode(DDI_DECODE_CONFIG_ATTR *ddiDecodeAttr)
     : DdiMediaBase()
@@ -638,6 +639,24 @@ int32_t DdiMediaDecode::ExecuteApgPipeline()
     uint32_t addrHigh = 0;
 
     setGpuAddress(&addrLow, &addrHigh, 1000, 10, 8);
+
+    while (1)
+    {
+        MediaPipe* pipe = new DecodeMpeg2Pipe();
+
+        if (pipe->createPipe() != 0)
+            break;
+        
+        if (pipe->executePipe() != 0)
+            break;
+
+        if (pipe->destroyPipe() != 0)
+            break;
+
+        delete pipe;
+        
+        break;
+    }
 
     return 0;
 }
