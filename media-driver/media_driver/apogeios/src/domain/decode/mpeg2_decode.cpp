@@ -90,8 +90,8 @@ int32_t Mpeg2DecodePkt::constructCmdSequence()
 
     for(int32_t slcIndex=0; slcIndex<1; slcIndex++)
     {
-        // m_mfxInterface->AddMfdMpeg2BsdObject
-        // mhw_vdbox_mfx_g9_skl::MFD_MPEG2_BSD_OBJECT_CMD
+        CmdMfxMpeg2BsdObject::MfxMpeg2BsdObjParams bsdObjParams = {};
+        addGpuCmd(new CmdMfxMpeg2BsdObject(&bsdObjParams));
     }
 
     addGpuCmd(new CmdPipeControl(FLUSH_READ_CACHE, PSO_WRITE_IMMEDIATE_DATA, statusReport_, 4, 1));

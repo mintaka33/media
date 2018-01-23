@@ -374,7 +374,22 @@ public:
     };
 public:
     CmdMfxMpeg2ImgState(MfxMpeg2ImgParams* params);
-    virtual ~CmdMfxMpeg2ImgState() {};
+    virtual ~CmdMfxMpeg2ImgState();
+    bool validate();
+    void parse();
+
+private:
+};
+
+class CmdMfxMpeg2BsdObject : public GpuCmdVDBox<mhw_vdbox_mfx_g9_skl::MFD_MPEG2_BSD_OBJECT_CMD>
+{
+public:
+    struct MfxMpeg2BsdObjParams
+    {
+    };
+public:
+    CmdMfxMpeg2BsdObject(MfxMpeg2BsdObjParams* params);
+    virtual ~CmdMfxMpeg2BsdObject();
     bool validate();
     void parse();
 

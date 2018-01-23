@@ -88,7 +88,7 @@ CmdMfxSurfaceState::CmdMfxSurfaceState(MediaResource* res, MfxSurfaceId surfId)
     pCmd_->DW2.Width = res->getWidth() - 1;
     pCmd_->DW3.TileWalk = 1; // set to 1 for all video codec and for JPEG.
     pCmd_->DW3.TiledSurface = (res->getTileType() != TILE_TYPE_LINEAR) ? true : false;
-    pCmd_->DW3.InterleaveChroma = (resFormat == Format_P8) ? 0 : 1;
+    pCmd_->DW3.InterleaveChroma = (resFormat == RES_FORMAT_P8) ? 0 : 1;
     pCmd_->DW3.SurfacePitch = res->getPitch() - 1;
     pCmd_->DW3.SurfaceFormat = ResFormat2SurfaceStateFormat(resFormat);
 
@@ -491,6 +491,26 @@ bool CmdMfxMpeg2ImgState::validate()
 }
 
 void CmdMfxMpeg2ImgState::parse()
+{
+    return;
+}
+
+CmdMfxMpeg2BsdObject::CmdMfxMpeg2BsdObject(MfxMpeg2BsdObjParams* params)
+{
+
+}
+
+CmdMfxMpeg2BsdObject::~CmdMfxMpeg2BsdObject()
+{
+
+}
+
+bool CmdMfxMpeg2BsdObject::validate()
+{
+    return true;
+}
+
+void CmdMfxMpeg2BsdObject::parse()
 {
     return;
 }
