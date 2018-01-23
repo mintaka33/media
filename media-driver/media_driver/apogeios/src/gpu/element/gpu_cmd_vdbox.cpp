@@ -475,6 +475,26 @@ void CmdMfxAvcImgState::parse()
 {
 }
 
+CmdMfxMpeg2ImgState::CmdMfxMpeg2ImgState(MfxMpeg2ImgParams* params)
+{
+
+}
+
+CmdMfxMpeg2ImgState::~CmdMfxMpeg2ImgState()
+{
+
+}
+
+bool CmdMfxMpeg2ImgState::validate()
+{
+    return true;
+}
+
+void CmdMfxMpeg2ImgState::parse()
+{
+    return;
+}
+
 CmdMfxQmState::CmdMfxQmState(AvcQmType qmType, AvcQmList& qmList)
 {
     uint8_t* qMatrix = (uint8_t*)pCmd_->ForwardQuantizerMatrix;

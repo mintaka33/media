@@ -82,8 +82,8 @@ int32_t Mpeg2DecodePkt::constructCmdSequence()
     CmdMfxBspBufBaseAddrState::BspBufResources bspBufRes = {};
     addGpuCmd(new CmdMfxBspBufBaseAddrState(&bspBufRes));
 
-    // m_mfxInterface->AddMfxMpeg2PicCmd
-    // mhw_vdbox_mfx_g9_skl::MFX_MPEG2_PIC_STATE_CMD
+    CmdMfxMpeg2ImgState::MfxMpeg2ImgParams imgParam = {};
+    addGpuCmd(new CmdMfxMpeg2ImgState(&imgParam));
 
     CmdMfxQmState::Mpeg2QmList qmList;  // Use default matrix
     addGpuCmd(new CmdMfxQmState(CmdMfxQmState::mpeg2QmIntra, qmList));

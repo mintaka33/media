@@ -366,6 +366,21 @@ private:
     static const VDEncFrameDelta tblFrameDelta_[2][52];
 };
 
+class CmdMfxMpeg2ImgState : public GpuCmdVDBox<mhw_vdbox_mfx_g9_skl::MFX_MPEG2_PIC_STATE_CMD>
+{
+public:
+    struct MfxMpeg2ImgParams
+    {
+    };
+public:
+    CmdMfxMpeg2ImgState(MfxMpeg2ImgParams* params);
+    virtual ~CmdMfxMpeg2ImgState() {};
+    bool validate();
+    void parse();
+
+private:
+};
+
 class CmdMfxQmState : public GpuCmdVDBox<mhw_vdbox_mfx_g9_skl::MFX_QM_STATE_CMD>
 {
 public:
