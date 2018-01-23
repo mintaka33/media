@@ -31,9 +31,41 @@ express and approved by Intel in writing.
 #pragma once
 
 #include "packet_ff.h"
+#include "mpeg2_decode.h"
+#include "media_pipeline.h"
 
 namespace Apogeios
 {
 
+class Mpeg2DecTask : public MediaTask
+{
+public:
+    Mpeg2DecTask();
+    ~Mpeg2DecTask();
+
+    int32_t create();
+    int32_t execute();
+    int32_t destroy();
+
+private:
+
+};
+
+class DecodeMpeg2Pipe : public MediaPipe
+{
+public:
+    DecodeMpeg2Pipe();
+    virtual ~DecodeMpeg2Pipe();
+
+    int32_t createPipe();
+    int32_t executePipe();
+    int32_t destroyPipe();
+
+    int32_t allocateResources();
+    int32_t destroyResources();
+
+private:
+
+};
 
 }

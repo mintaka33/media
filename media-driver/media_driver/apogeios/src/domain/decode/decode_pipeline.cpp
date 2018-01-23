@@ -29,10 +29,64 @@ express and approved by Intel in writing.
 //!
 
 #include "common.h"
-#include "gpu_cmd_mi.h"
-#include "gpu_cmd_render.h"
+#include "decode_pipeline.h"
 
 namespace Apogeios
 {
+
+Mpeg2DecTask::Mpeg2DecTask()
+{
+}
+
+Mpeg2DecTask::~Mpeg2DecTask()
+{
+}
+
+int32_t Mpeg2DecTask::create()
+{
+    return 0;
+}
+
+int32_t Mpeg2DecTask::execute()
+{
+    return 0;
+}
+
+int32_t Mpeg2DecTask::destroy()
+{
+    return 0;
+}
+
+DecodeMpeg2Pipe::DecodeMpeg2Pipe()
+{
+}
+DecodeMpeg2Pipe::~DecodeMpeg2Pipe()
+{
+}
+
+int32_t DecodeMpeg2Pipe::createPipe()
+{
+    return 0;
+}
+
+int32_t DecodeMpeg2Pipe::executePipe()
+{
+    return 0;
+}
+
+int32_t DecodeMpeg2Pipe::destroyPipe()
+{
+    return 0;
+}
+
+int32_t DecodeMpeg2Pipe::allocateResources()
+{
+    return 0;
+}
+
+int32_t DecodeMpeg2Pipe::destroyResources()
+{
+    return 0;
+}
 
 }
