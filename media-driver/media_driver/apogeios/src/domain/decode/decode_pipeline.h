@@ -48,7 +48,7 @@ public:
     int32_t destroy();
 
 private:
-
+    Mpeg2DecodePkt* decPkt_ = nullptr;
 };
 
 class DecodeMpeg2Pipe : public MediaPipe
@@ -65,7 +65,7 @@ public:
     int32_t destroyResources();
 
 private:
-
+    Mpeg2DecTask* decTask_ = nullptr;
 };
 
 }

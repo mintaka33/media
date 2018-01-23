@@ -44,16 +44,43 @@ Mpeg2DecTask::~Mpeg2DecTask()
 
 int32_t Mpeg2DecTask::create()
 {
+    decPkt_ = new Mpeg2DecodePkt();
+
+    if (decPkt_->createPacket() != 0)
+        return -1;
+
     return 0;
 }
 
 int32_t Mpeg2DecTask::execute()
 {
+    // add mpeg2 decode packet into task
+    if (decPkt_)
+    {
+        if (decPkt_->preparePacket() != 0)
+            return -1;
+
+        addPacket(decPkt_);
+    }
+
+    if (submitTask(false) != 0)
+        return -1;
+
     return 0;
 }
 
 int32_t Mpeg2DecTask::destroy()
 {
+    if (decPkt_)
+    {
+        if (decPkt_->destroyPacket() != 0)
+            return -1;
+        delete decPkt_;
+    }
+
+    if (destroyTask() != 0)
+        return -1;
+
     return 0;
 }
 
@@ -66,16 +93,50 @@ DecodeMpeg2Pipe::~DecodeMpeg2Pipe()
 
 int32_t DecodeMpeg2Pipe::createPipe()
 {
+    if (allocateResources() != 0)
+    {
+        return -1;
+    }
+
+    decTask_ = new Mpeg2DecTask();
+    if (decTask_->create() != 0)
+    {
+        return -1;
+    }
+
     return 0;
 }
 
 int32_t DecodeMpeg2Pipe::executePipe()
 {
+    if (resetPipe() != 0)
+        return -1;
+
+    addTask(decTask_);
+
+    if (flushPipe() != 0)
+        return -1;
+
     return 0;
 }
 
 int32_t DecodeMpeg2Pipe::destroyPipe()
 {
+    if (resetPipe() != 0)
+        return -1;
+
+    if (decTask_)
+    {
+        if (decTask_->destroy() != 0)
+            return -1;
+        delete decTask_;
+    }
+
+    if (destroyResources() != 0)
+    {
+        return -1;
+    }
+
     return 0;
 }
 
