@@ -20,10 +20,12 @@
 
 set(TMP_SOURCES_
     ${CMAKE_CURRENT_LIST_DIR}/convert_nv12_p010.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/decode_pipeline.cpp
 )
 
 set(TMP_HEADERS_
     ${CMAKE_CURRENT_LIST_DIR}/convert_nv12_p010.h
+    ${CMAKE_CURRENT_LIST_DIR}/decode_pipeline.h
 )
 
 set(SOURCES_
