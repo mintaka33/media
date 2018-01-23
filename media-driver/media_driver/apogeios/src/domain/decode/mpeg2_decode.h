@@ -35,6 +35,8 @@ express and approved by Intel in writing.
 namespace Apogeios
 {
 
+class MediaResource;
+
 class Mpeg2DecodePkt : public FfPacket
 {
 public:
@@ -52,7 +54,8 @@ private:
     int32_t destroyResource();
 
 private:
-
+    MediaResource* statusReport_ = nullptr;
+    MediaResource* decOut_ = nullptr;
 };
 
 }

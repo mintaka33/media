@@ -29,6 +29,8 @@ express and approved by Intel in writing.
 //!
 
 #include "mpeg2_decode.h"
+#include "gpu_cmd_vdbox.h"
+#include "gpu_cmd_mi.h"
 
 namespace Apogeios
 {
@@ -63,6 +65,39 @@ int32_t Mpeg2DecodePkt::destroyPacket()
 
 int32_t Mpeg2DecodePkt::constructCmdSequence()
 {
+    addGpuCmd(new CmdMiFlushDW(true));
+
+    addGpuCmd(new CmdPipeControl(FLUSH_READ_CACHE, PSO_WRITE_IMMEDIATE_DATA, statusReport_, 0, 0));
+
+    addGpuCmd(new CmdMfxPipeModeSelect(MFX_MPEG2, 1, 0, 1, 0, 1, 0));
+
+    addGpuCmd(new CmdMfxSurfaceState(decOut_, MFX_REF));
+
+    CmdMfxPipeBufAddrState::PipeBufResources pipeBufRes = {};
+    addGpuCmd(new CmdMfxPipeBufAddrState(&pipeBufRes));
+
+    CmdMfxIndObjBaseAddrState::IndObjResources indObjRes = {};
+    addGpuCmd(new CmdMfxIndObjBaseAddrState(&indObjRes));
+
+    CmdMfxBspBufBaseAddrState::BspBufResources bspBufRes = {};
+    addGpuCmd(new CmdMfxBspBufBaseAddrState(&bspBufRes));
+
+    // m_mfxInterface->AddMfxMpeg2PicCmd
+    // mhw_vdbox_mfx_g9_skl::MFX_MPEG2_PIC_STATE_CMD
+
+    CmdMfxQmState::Mpeg2QmList qmList;  // Use default matrix
+    addGpuCmd(new CmdMfxQmState(CmdMfxQmState::mpeg2QmIntra, qmList));
+
+    for(int32_t slcIndex=0; slcIndex<1; slcIndex++)
+    {
+        // m_mfxInterface->AddMfdMpeg2BsdObject
+        // mhw_vdbox_mfx_g9_skl::MFD_MPEG2_BSD_OBJECT_CMD
+    }
+
+    addGpuCmd(new CmdPipeControl(FLUSH_READ_CACHE, PSO_WRITE_IMMEDIATE_DATA, statusReport_, 4, 1));
+
+    addGpuCmd(new CmdMiBatchBufferEnd);
+
     return 0;
 }
 

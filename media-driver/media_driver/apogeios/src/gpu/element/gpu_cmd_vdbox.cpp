@@ -517,6 +517,17 @@ CmdMfxQmState::CmdMfxQmState(AvcQmType qmType, AvcQmList& qmList)
     }
 }
 
+CmdMfxQmState::CmdMfxQmState(Mpeg2QmType qmType, Mpeg2QmList& qmList)
+{
+    uint8_t* qMatrix = (uint8_t*)pCmd_->ForwardQuantizerMatrix;
+    pCmd_->DW1.Obj1.Mpeg2 = qmType;
+
+    for (uint8_t i = 0; i < 64; i++)
+    {
+        qMatrix[i] = qmList.qmList64[i];
+    }
+}
+
 bool CmdMfxQmState::validate()
 {
     return true;

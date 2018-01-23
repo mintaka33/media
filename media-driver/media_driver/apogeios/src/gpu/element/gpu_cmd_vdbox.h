@@ -377,6 +377,12 @@ public:
         avcQmInter8x8 = 3
     };
 
+    enum Mpeg2QmType
+    {
+        mpeg2QmIntra = 0,
+        mpeg2QmNonIntra,
+    };
+
     struct AvcQmList
     {
         AvcQmList()
@@ -401,8 +407,20 @@ public:
         uint8_t qmList8x8_[2][64];
     };
 
+    struct Mpeg2QmList
+    {
+        Mpeg2QmList()
+        {
+            for (auto i=0; i<64; i++)
+                qmList64[i] = 16;
+        }
+
+        uint8_t qmList64[64];
+    };
+
 public:
     CmdMfxQmState(AvcQmType qmType, AvcQmList& qmList);
+    CmdMfxQmState(Mpeg2QmType qmType, Mpeg2QmList& qmList);
     virtual ~CmdMfxQmState() {};
     bool validate();
     void parse();
