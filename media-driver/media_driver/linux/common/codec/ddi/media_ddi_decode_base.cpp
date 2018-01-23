@@ -642,7 +642,7 @@ int32_t DdiMediaDecode::ExecuteApgPipeline()
 
     while (1)
     {
-        MediaPipe* pipe = new DecodeMpeg2Pipe();
+        Apogeios::MediaPipe* pipe = new Apogeios::DecodeMpeg2Pipe();
 
         if (pipe->createPipe() != 0)
             break;
@@ -654,7 +654,7 @@ int32_t DdiMediaDecode::ExecuteApgPipeline()
             break;
 
         delete pipe;
-        
+
         break;
     }
 
