@@ -640,7 +640,7 @@ int32_t DdiMediaDecode::ExecuteApgPipeline()
 
     setGpuAddress(&addrLow, &addrHigh, 1000, 10, 8);
 
-    while (0)
+    while (1)
     {
         Apogeios::MediaPipe* pipe = new Apogeios::DecodeMpeg2Pipe();
 

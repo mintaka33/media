@@ -102,13 +102,6 @@ int32_t Mpeg2DecodePkt::destroyPacket()
 {
     bool bFail = false;
 
-    if (statusReport_)
-    {
-        statusReport_->destroy();
-        delete statusReport_;
-        statusReport_ = nullptr;
-    }
-
     deleteGpuCmd();
 
     if (destroyResource() != 0)
@@ -161,11 +154,29 @@ int32_t Mpeg2DecodePkt::constructCmdSequence()
 
 int32_t Mpeg2DecodePkt::allocateResource()
 {
+    decOut_ = new MediaResource(RES_TYPE_2D, RES_FORMAT_NV12, TILE_TYPE_Y, 1920, 1080, "DecodeOutNV12");
+    if (statusReport_->create() != 0)
+            return -1;
+
     return 0;
 }
 
 int32_t Mpeg2DecodePkt::destroyResource()
 {
+    if (statusReport_)
+    {
+        statusReport_->destroy();
+        delete statusReport_;
+        statusReport_ = nullptr;
+    }
+
+    if (decOut_)
+    {
+        decOut_->destroy();
+        delete decOut_;
+        decOut_ = nullptr;
+    }
+
     return 0;
 }
 
