@@ -38,6 +38,7 @@ express and approved by Intel in writing.
 
 #include "GmmLib.h"
 #include "media_fourcc.h"
+#include "mos_bufmgr.h"
 
 namespace Apogeios
 {
@@ -204,6 +205,8 @@ private:
     GMM_RESOURCE_INFO* gmmResInfo_ = nullptr;
     uint32_t numAllocations_ = 0;
     uint64_t fenceOut_ = 0;
+
+    mos_linux_bo *bo_;
 
     static IResourceCb* pCallback_;
 };

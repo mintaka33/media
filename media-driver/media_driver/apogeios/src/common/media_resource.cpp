@@ -33,6 +33,8 @@ express and approved by Intel in writing.
 namespace Apogeios
 {
 
+IResourceCb* MediaResource::pCallback_ = nullptr;
+
 MediaResource::MediaResource(RESOURCE_TYPE type, RES_FORMAT format, uint32_t size, bool bExecute, std::string name)
 {
     resType_ = type;
@@ -57,6 +59,27 @@ MediaResource::MediaResource(RESOURCE_TYPE type, RES_FORMAT format, TILE_TYPE ti
 
 int32_t MediaResource::create()
 {
+    if (pCallback_->AllocateCb(bo_, width_, width_, name_.c_str()) != 0) 
+    {
+        return -1;
+    }
+
+    if(bo_ == nullptr)
+    {
+        return -1;
+    }
+
+    // create fake GmmResourceInfo
+    GMM_RESCREATE_PARAMS gmmParams = {};
+    gmmParams.BaseWidth             = 1;
+    gmmParams.BaseHeight            = 1;
+    gmmParams.ArraySize             = 0;
+    gmmParams.Type                  = RESOURCE_1D;
+    gmmParams.Format                = GMM_FORMAT_GENERIC_8BIT;
+    gmmParams.Flags.Gpu.Video       = true;
+    gmmParams.Flags.Info.Linear     = true;
+    gmmResInfo_ = GmmResCreate(&gmmParams);
+
     return 0;
 }
 

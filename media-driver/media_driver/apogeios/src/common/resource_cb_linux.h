@@ -32,6 +32,11 @@ express and approved by Intel in writing.
 
 #include "resource_cb.h"
 
+#include "libdrm_macros.h"
+#include "libdrm_lists.h"
+#include "mos_bufmgr.h"
+#include "mos_bufmgr_priv.h"
+
 namespace Apogeios
 {
 
@@ -43,7 +48,7 @@ public:
 
     static ResourceCbImpl *getInstance();
 
-    int32_t AllocateCb(void* pAllocateParams);
+    int32_t AllocateCb(void* bo, uint32_t size, uint32_t alignment, int8_t* name);
     int32_t DeallocateCb(const void* pDeallocate);
     int32_t Deallocate2Cb(const void* pDealloc);
     int32_t LockCb(void* pLockParams);
@@ -58,6 +63,7 @@ public:
 
 private:
     static ResourceCbImpl* pInstance_;
+    mos_bufmgr* bufmgr;
 };
 
 }
