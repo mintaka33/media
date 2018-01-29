@@ -61,9 +61,11 @@ public:
     int32_t MakeResidentCb(void* pParams) ;
     int32_t EvictCb(void* pParams);
 
+    void setBufMgr(mos_bufmgr* bufmgr) { bufmgr_ = bufmgr; };
+
 private:
     static ResourceCbImpl* pInstance_;
-    mos_bufmgr* bufmgr;
+    mos_bufmgr* bufmgr_;
 };
 
 }

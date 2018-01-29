@@ -62,6 +62,9 @@
 #include "media_interfaces_mmd.h"
 #include "mos_util_user_interface.h"
 
+#include "media_resource.h"
+#include "resource_cb_linux.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -1421,6 +1424,11 @@ VAStatus DdiMedia__Initialize (
             return VA_STATUS_ERROR_OPERATION_FAILED;
         }
     }
+
+    // Set Resource callbacks
+    Apogeios::ResourceCbImpl* pResourceCbInstance = Apogeios::ResourceCbImpl::getInstance();
+    pResourceCbInstance->setBufMgr(mediaCtx->pDrmBufMgr);
+    Apogeios::MediaResource::setCallbackInstance(pResourceCbInstance);
 
     DdiMediaUtil_UnLockMutex(&GlobalMutex);
 

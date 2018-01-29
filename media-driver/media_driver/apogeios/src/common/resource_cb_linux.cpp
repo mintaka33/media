@@ -33,7 +33,7 @@ express and approved by Intel in writing.
 namespace Apogeios
 {
 
-ResourceCbImpl* ResourceCbImpl::pInstance_ = nullptr;
+ResourceCbImpl* ResourceCbImpl::pInstance_ = new ResourceCbImpl();;
 
 ResourceCbImpl *ResourceCbImpl::getInstance()
 {
