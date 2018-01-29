@@ -33,16 +33,17 @@ express and approved by Intel in writing.
 namespace Apogeios
 {
 
-ResourceCbImpl* ResourceCbImpl::pInstance_ = new ResourceCbImpl();;
+ResourceCbImpl* ResourceCbImpl::pInstance_ = new ResourceCbImpl();
 
 ResourceCbImpl *ResourceCbImpl::getInstance()
 {
     return pInstance_;
 }
 
-int32_t ResourceCbImpl::AllocateCb(void* bo, uint32_t size, uint32_t alignment, int8_t* name)
+int32_t ResourceCbImpl::AllocateCb(void** bo, uint32_t size, uint32_t alignment, int8_t* name)
 {
-    return 0;
+    *bo = bufmgr_->bo_alloc(bufmgr_, (const char*)name, size, alignment);
+    return (*bo == nullptr) ? -1 : 0;
 }
 
 int32_t ResourceCbImpl::DeallocateCb(const void *pDeallocate)

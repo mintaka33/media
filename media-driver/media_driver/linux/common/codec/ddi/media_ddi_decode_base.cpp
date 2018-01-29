@@ -635,10 +635,12 @@ VAStatus DdiMediaDecode::SetDecodeParams()
 
 int32_t DdiMediaDecode::ExecuteApgPipeline()
 {
-    uint32_t addrLow = 0;
-    uint32_t addrHigh = 0;
-
-    setGpuAddress(&addrLow, &addrHigh, 1000, 10, 8);
+    Apogeios::MediaResource* decRT = new Apogeios::MediaResource(Apogeios::RES_TYPE_2D, 
+        Apogeios::RES_FORMAT_NV12, Apogeios::TILE_TYPE_Y, 1920, 1088, "DecRTNV12");
+    if (decRT->create() != 0)
+    {
+        return -1;
+    }
 
     while (1)
     {
@@ -656,6 +658,11 @@ int32_t DdiMediaDecode::ExecuteApgPipeline()
         delete pipe;
 
         break;
+    }
+
+    if (decRT->destroy() != 0)
+    {
+        return -1;
     }
 
     return 0;

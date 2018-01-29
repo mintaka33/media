@@ -59,7 +59,7 @@ MediaResource::MediaResource(RESOURCE_TYPE type, RES_FORMAT format, TILE_TYPE ti
 
 int32_t MediaResource::create()
 {
-    if (pCallback_->AllocateCb(bo_, width_, width_, name_.c_str()) != 0) 
+    if (pCallback_->AllocateCb(&bo_, width_, width_, name_.c_str()) != 0) 
     {
         return -1;
     }
