@@ -85,6 +85,11 @@ int32_t MediaResource::create()
 
 int32_t MediaResource::destroy()
 {
+    if (pCallback_->DeallocateCb(bo_) != 0)
+    {
+        return -1;
+    }
+
     return 0;
 }
 

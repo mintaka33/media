@@ -46,8 +46,13 @@ int32_t ResourceCbImpl::AllocateCb(void** bo, uint32_t size, uint32_t alignment,
     return (*bo == nullptr) ? -1 : 0;
 }
 
-int32_t ResourceCbImpl::DeallocateCb(const void *pDeallocate)
+int32_t ResourceCbImpl::DeallocateCb(void* bo)
 {
+    if (bo == nullptr)
+        return 0;
+
+    bufmgr_->bo_unreference((mos_linux_bo*)bo);
+    
     return 0;
 }
 

@@ -49,7 +49,7 @@ public:
     static ResourceCbImpl *getInstance();
 
     int32_t AllocateCb(void** bo, uint32_t size, uint32_t alignment, int8_t* name);
-    int32_t DeallocateCb(const void* pDeallocate);
+    int32_t DeallocateCb(void* bo);
     int32_t Deallocate2Cb(const void* pDealloc);
     int32_t LockCb(void* pLockParams);
     int32_t Lock2Cb(void* pLock2Params);

@@ -42,7 +42,7 @@ public:
     virtual ~IResourceCb();
 
     virtual int32_t AllocateCb(void** bo, uint32_t size, uint32_t alignment, int8_t* name) = 0;
-    virtual int32_t DeallocateCb(const void* pDeallocate) = 0;
+    virtual int32_t DeallocateCb(void* bo) = 0;
     virtual int32_t Deallocate2Cb(const void* pDealloc) = 0;
     virtual int32_t LockCb(void* pLockParams) = 0;
     virtual int32_t Lock2Cb(void* pLock2Params) = 0;
