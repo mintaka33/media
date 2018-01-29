@@ -64,11 +64,11 @@ TARGET_LINK_LIBRARIES(drvult libgtest libdl.so)
 
 if (NOT "${Full_Open_Source_Support}" STREQUAL "yes")
 add_custom_target(RunULT ALL DEPENDS iHD_drv_video drvult)
-add_custom_command(
-    TARGET RunULT
-    POST_BUILD
-    COMMAND LD_PRELOAD=../libdrm_mock/libdrm_mock.so ./drvult ../../../iHD_drv_video.so
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Running drvult..."
-)
+#add_custom_command(
+#    TARGET RunULT
+#    POST_BUILD
+#    COMMAND LD_PRELOAD=../libdrm_mock/libdrm_mock.so ./drvult ../../../iHD_drv_video.so
+#    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#    COMMENT "Running drvult..."
+#)
 endif ()
