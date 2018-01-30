@@ -59,6 +59,45 @@ MediaResource::MediaResource(RESOURCE_TYPE type, RES_FORMAT format, TILE_TYPE ti
 
 int32_t MediaResource::create()
 {
+    // Create GmmResourceInfo
+    GMM_RESCREATE_PARAMS gmmParams = {};
+
+    if (resType_ == RES_TYPE_BUFFER)
+    {
+        GMM_RESCREATE_PARAMS gmmParams = {};
+        gmmParams.BaseWidth             = width_;
+        gmmParams.BaseHeight            = 1;
+        gmmParams.ArraySize             = 0;
+        gmmParams.Type                  = RESOURCE_1D;
+        gmmParams.Format                = GMM_FORMAT_GENERIC_8BIT;
+        gmmParams.Flags.Gpu.Video       = true;
+        gmmParams.Flags.Info.Linear     = true;
+    }
+    else if (resType_ == RES_TYPE_2D)
+    {
+        gmmParams.BaseWidth         = width_;
+        gmmParams.BaseHeight        = height_;
+        gmmParams.ArraySize         = 1;
+        gmmParams.Type              = RESOURCE_2D;
+        gmmParams.Format            = GMM_FORMAT_GENERIC_8BIT;
+        gmmParams.Flags.Info.Linear = (tileType_ == TILE_TYPE_LINEAR) ? true : false;
+        gmmParams.Flags.Gpu.Video   = true;
+    }
+    else
+    {
+        return -1;
+    }
+
+    gmmResInfo_ = GmmResCreate(&gmmParams);
+    if (gmmResInfo_ == nullptr)
+    {
+        return -1;
+    }
+
+    // GmmResOverrideAllocationSize(gmmResInfo_, width_);
+    // GmmResOverrideAllocationBaseWidth(gmmResInfo_, width_);
+    // GmmResOverrideAllocationPitch(gmmResInfo_, width_);
+
     if (pCallback_->AllocateCb(&bo_, width_, width_, name_.c_str()) != 0) 
     {
         return -1;
@@ -68,17 +107,6 @@ int32_t MediaResource::create()
     {
         return -1;
     }
-
-    // create fake GmmResourceInfo
-    GMM_RESCREATE_PARAMS gmmParams = {};
-    gmmParams.BaseWidth             = 1;
-    gmmParams.BaseHeight            = 1;
-    gmmParams.ArraySize             = 0;
-    gmmParams.Type                  = RESOURCE_1D;
-    gmmParams.Format                = GMM_FORMAT_GENERIC_8BIT;
-    gmmParams.Flags.Gpu.Video       = true;
-    gmmParams.Flags.Info.Linear     = true;
-    gmmResInfo_ = GmmResCreate(&gmmParams);
 
     return 0;
 }
