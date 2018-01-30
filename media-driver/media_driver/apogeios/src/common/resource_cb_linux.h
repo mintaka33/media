@@ -40,32 +40,43 @@ express and approved by Intel in writing.
 namespace Apogeios
 {
 
+struct LockArg
+{
+    void* bo;
+    uint32_t flag;
+    void* ptr;
+};
+
+struct UnlockArg
+{
+    void* bo;
+};
+
 class ResourceCbImpl : public IResourceCb
 {
-public:
-    ResourceCbImpl() {};
-    virtual ~ResourceCbImpl() {};
+  public:
+    ResourceCbImpl(){};
+    virtual ~ResourceCbImpl(){};
 
     static ResourceCbImpl *getInstance();
 
-    int32_t AllocateCb(void** bo, uint32_t size, uint32_t alignment, int8_t* name);
-    int32_t DeallocateCb(void* bo);
-    int32_t Deallocate2Cb(const void* pDealloc);
-    int32_t LockCb(void* pLockParams);
-    int32_t Lock2Cb(void* pLock2Params);
-    int32_t UnlockCb(const void* pUnlockParams);
-    int32_t Unlock2Cb(const void* pUnlock2Params);
-    int32_t MapGpuVirtualAddressCb(void* pParams);
-    int32_t FreeGpuVirtualAddressCb(const void* pParams);
-    int32_t UpdateGpuVirtualAddressCb(const void* pParams);
-    int32_t MakeResidentCb(void* pParams) ;
-    int32_t EvictCb(void* pParams);
+    int32_t AllocateCb(void **bo, uint32_t size, uint32_t alignment, int8_t *name);
+    int32_t DeallocateCb(void *bo);
+    int32_t Deallocate2Cb(const void *pDealloc);
+    int32_t LockCb(void *pLockParams);
+    int32_t Lock2Cb(void *pLock2Params);
+    int32_t UnlockCb(const void *pUnlockParams);
+    int32_t Unlock2Cb(const void *pUnlock2Params);
+    int32_t MapGpuVirtualAddressCb(void *pParams);
+    int32_t FreeGpuVirtualAddressCb(const void *pParams);
+    int32_t UpdateGpuVirtualAddressCb(const void *pParams);
+    int32_t MakeResidentCb(void *pParams);
+    int32_t EvictCb(void *pParams);
 
-    void setBufMgr(mos_bufmgr* bufmgr) { bufmgr_ = bufmgr; };
+    void setBufMgr(mos_bufmgr *bufmgr) { bufmgr_ = bufmgr; };
 
-private:
-    static ResourceCbImpl* pInstance_;
-    mos_bufmgr* bufmgr_;
+  private:
+    static ResourceCbImpl *pInstance_;
+    mos_bufmgr *bufmgr_;
 };
-
 }

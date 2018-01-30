@@ -29,11 +29,12 @@ express and approved by Intel in writing.
 //!
 
 #include "media_resource.h"
+#include "resource_cb_linux.h"
 
 namespace Apogeios
 {
 
-IResourceCb* MediaResource::pCallback_ = nullptr;
+IResourceCb *MediaResource::pCallback_ = nullptr;
 
 MediaResource::MediaResource(RESOURCE_TYPE type, RES_FORMAT format, uint32_t size, bool bExecute, std::string name)
 {
@@ -65,23 +66,23 @@ int32_t MediaResource::create()
     if (resType_ == RES_TYPE_BUFFER)
     {
         GMM_RESCREATE_PARAMS gmmParams = {};
-        gmmParams.BaseWidth             = width_;
-        gmmParams.BaseHeight            = 1;
-        gmmParams.ArraySize             = 0;
-        gmmParams.Type                  = RESOURCE_1D;
-        gmmParams.Format                = GMM_FORMAT_GENERIC_8BIT;
-        gmmParams.Flags.Gpu.Video       = true;
-        gmmParams.Flags.Info.Linear     = true;
+        gmmParams.BaseWidth = width_;
+        gmmParams.BaseHeight = 1;
+        gmmParams.ArraySize = 0;
+        gmmParams.Type = RESOURCE_1D;
+        gmmParams.Format = GMM_FORMAT_GENERIC_8BIT;
+        gmmParams.Flags.Gpu.Video = true;
+        gmmParams.Flags.Info.Linear = true;
     }
     else if (resType_ == RES_TYPE_2D)
     {
-        gmmParams.BaseWidth         = width_;
-        gmmParams.BaseHeight        = height_;
-        gmmParams.ArraySize         = 1;
-        gmmParams.Type              = RESOURCE_2D;
-        gmmParams.Format            = GMM_FORMAT_GENERIC_8BIT;
+        gmmParams.BaseWidth = width_;
+        gmmParams.BaseHeight = height_;
+        gmmParams.ArraySize = 1;
+        gmmParams.Type = RESOURCE_2D;
+        gmmParams.Format = GMM_FORMAT_GENERIC_8BIT;
         gmmParams.Flags.Info.Linear = (tileType_ == TILE_TYPE_LINEAR) ? true : false;
-        gmmParams.Flags.Gpu.Video   = true;
+        gmmParams.Flags.Gpu.Video = true;
     }
     else
     {
@@ -98,12 +99,12 @@ int32_t MediaResource::create()
     // GmmResOverrideAllocationBaseWidth(gmmResInfo_, width_);
     // GmmResOverrideAllocationPitch(gmmResInfo_, width_);
 
-    if (pCallback_->AllocateCb(&bo_, width_, width_, name_.c_str()) != 0) 
+    if (pCallback_->AllocateCb(&bo_, width_, width_, name_.c_str()) != 0)
     {
         return -1;
     }
 
-    if(bo_ == nullptr)
+    if (bo_ == nullptr)
     {
         return -1;
     }
@@ -146,22 +147,34 @@ int32_t MediaResource::evict()
     return 0;
 }
 
-void* MediaResource::lock()
+void *MediaResource::lock()
 {
-    return nullptr;
+    LockArg arg = {};
+    arg.bo = bo_;
+    arg.flag = true;
+
+    if (pCallback_->LockCb(&arg) != 0)
+    {
+        return nullptr;
+    }
+
+    return arg.ptr;
 }
 
 int32_t MediaResource::unlock()
 {
-    return 0;
+    UnlockArg arg = {};
+    arg.bo = bo_;
+    
+    return pCallback_->UnlockCb(&arg);
 }
 
-int32_t MediaResource::readData(uint8_t* pDst, int32_t size, int32_t offset /*= 0*/)
+int32_t MediaResource::readData(uint8_t *pDst, int32_t size, int32_t offset /*= 0*/)
 {
     return 0;
 }
 
-int32_t MediaResource::writeData(uint8_t* pSrc, int32_t size, int32_t offset /*= 0*/)
+int32_t MediaResource::writeData(uint8_t *pSrc, int32_t size, int32_t offset /*= 0*/)
 {
     return 0;
 }
@@ -180,5 +193,4 @@ int32_t MediaResource::initGmmParam()
 {
     return 0;
 }
-
 }

@@ -33,26 +33,26 @@ express and approved by Intel in writing.
 namespace Apogeios
 {
 
-ResourceCbImpl* ResourceCbImpl::pInstance_ = new ResourceCbImpl();
+ResourceCbImpl *ResourceCbImpl::pInstance_ = new ResourceCbImpl();
 
 ResourceCbImpl *ResourceCbImpl::getInstance()
 {
     return pInstance_;
 }
 
-int32_t ResourceCbImpl::AllocateCb(void** bo, uint32_t size, uint32_t alignment, int8_t* name)
+int32_t ResourceCbImpl::AllocateCb(void **bo, uint32_t size, uint32_t alignment, int8_t *name)
 {
-    *bo = bufmgr_->bo_alloc(bufmgr_, (const char*)name, size, alignment);
+    *bo = bufmgr_->bo_alloc(bufmgr_, (const char *)name, size, alignment);
     return (*bo == nullptr) ? -1 : 0;
 }
 
-int32_t ResourceCbImpl::DeallocateCb(void* bo)
+int32_t ResourceCbImpl::DeallocateCb(void *bo)
 {
     if (bo == nullptr)
         return 0;
 
-    bufmgr_->bo_unreference((mos_linux_bo*)bo);
-    
+    bufmgr_->bo_unreference((mos_linux_bo *)bo);
+
     return 0;
 }
 
@@ -63,6 +63,9 @@ int32_t ResourceCbImpl::Deallocate2Cb(const void *pDealloc)
 
 int32_t ResourceCbImpl::LockCb(void *pLockParams)
 {
+    LockArg *pArg = (LockArg *)pLockParams;
+    pArg->ptr = bufmgr_->bo_map(pArg->bo, true);
+
     return 0;
 }
 
@@ -73,7 +76,8 @@ int32_t ResourceCbImpl::Lock2Cb(void *pLock2Params)
 
 int32_t ResourceCbImpl::UnlockCb(const void *pUnlockParams)
 {
-    return 0;
+    UnlockArg *pArg = (UnlockArg *)pUnlockParams;
+    return bufmgr_->bo_unmap(pArg->bo);
 }
 
 int32_t ResourceCbImpl::Unlock2Cb(const void *pUnlock2Params)
@@ -105,5 +109,4 @@ int32_t ResourceCbImpl::EvictCb(void *pParams)
 {
     return 0;
 }
-
 }
