@@ -34,6 +34,10 @@ make -j8
 
 sudo make install
 ```
+note: if build debug version driver, add below line in cmake command
+```bash
+-DBUILD_TYPE=Debug
+```
 
 ### 3. Build libva-utils
 
